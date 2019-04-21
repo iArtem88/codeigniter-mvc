@@ -6,6 +6,7 @@
     <div>
         <?php echo $article['text']; ?>
     </div>
+    <a href="edit/<?php echo $article['slug']; ?>">Edit</a>
 <?php } ?>
 <hr>
 <a href="create">Add Article</a>

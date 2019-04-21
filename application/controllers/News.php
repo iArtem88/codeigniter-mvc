@@ -76,23 +76,31 @@ class News extends CI_Controller
 
         $data['news_item'] = $this->news_model->getNews($slug);
 
-        // ????? зачем такая сложная конструкция - разобраться!
-
-        $data['title_news'] = $data['news_item']['title'];
-        $data['text_news'] = $data['news_item']['text'];
-        $data['slug_news'] = $data['news_item']['slug'];
-
-        $title = $this->input->post('title');
-        $text = $this->input->post('text');
-        $slug = $this->input->post('slug');
-
-        if ( $this->news_model->update_article($title, $text, $slug) ) {
-            echo 'Article updated successfuly';
+        if (empty($data['news_item'])) {
+            show_404();
         }
+
+        if($slug) {
+
+            $data['title_news'] = $data['news_item']['title'];
+            $data['text_news'] = $data['news_item']['text'];
+            $data['slug_news'] = $data['news_item']['slug'];
+
+        }
+
+            $title = $this->input->post('title');
+            $text = $this->input->post('text');
+            $slug = $this->input->post('slug');
+
+            if ($title && $text && $slug) {
+
+                if ($this->news_model->updateArticle($title, $text, $slug)) {
+                    echo 'Article updated successfuly';
+                }
+            }
 
         $this->load->view('templates/header', $data);
         $this->load->view('news/edit', $data);
         $this->load->view('templates/footer');
     }
-
 }
