@@ -17,6 +17,8 @@ class Pages_model extends CI_Model
         }
 
         /*
+         * RU:
+         *
          * Класс конструктора запросов (Query Builder)
          * http://codeigniter3.info/guide/database/query_builder
          *

@@ -14,7 +14,7 @@ class Pages extends CI_Controller
     public function view($page = 'home') //slug
     {
         if (!file_exists(APPPATH . '/views/pages/' . $page . '.php')) {
-            // Упс, у нас нет такой страницы!
+            // RU: Упс, у нас нет такой страницы!
             show_404();
         }
 

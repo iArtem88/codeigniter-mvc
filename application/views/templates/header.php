@@ -8,5 +8,12 @@
 	<title><?php echo $title; ?></title>
 </head>
 <header>Logo</header>
+<a href="/home">Home</a>
+<a href="/about">About</a>
+<hr>
+<ul style="display: inline-block">
+    <li><a href="/news">All Articles</a></li>
+    <li><a href="/news/create">Create Article</a></li>
+</ul>
 <body>
 <hr>

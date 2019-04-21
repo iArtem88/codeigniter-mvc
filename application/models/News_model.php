@@ -20,6 +20,8 @@ class News_model extends CI_Model
         }
 
         /*
+         * RU:
+         *
          * Класс конструктора запросов (Query Builder)
          * http://codeigniter3.info/guide/database/query_builder
          *
@@ -68,4 +70,8 @@ class News_model extends CI_Model
         return $this->db->update('news', $data, array('slug' => $slug));
     }
 
+    public function deleteArticle($slug)
+    {
+        return $this->db->delete('news', array('slug' => $slug));
+    }
 }

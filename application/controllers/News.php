@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /********************************
  *
+ * RU:
  *
  * Контроллер является центром каждого запроса веб приложения.
  * В техническом понимании CodeIgniter, может быть определен как супер объект.
@@ -95,12 +96,35 @@ class News extends CI_Controller
             if ($title && $text && $slug) {
 
                 if ($this->news_model->updateArticle($title, $text, $slug)) {
-                    echo 'Article updated successfuly';
+
+                    header('Location: ' . $_SERVER["HTTP_ORIGIN"]. '/news');
+                    exit;
+
                 }
             }
 
         $this->load->view('templates/header', $data);
         $this->load->view('news/edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function delete($slug = null)
+    {
+        $data['news'] = $this->news_model->getNews($slug); //$data['news_item'] - just for test attentiveness
+
+        if (empty($data['news'])) {
+            show_404();
+        }
+
+        $data['title'] = 'Remove article';
+        $data['result'] = 'Remove error' . $data['news']['title'];
+
+        if($this->news_model->deleteArticle($slug)) {
+            $data['result'] = $data['news']['title'] . ' removed succesfully';
+        }
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('news/delete', $data);
         $this->load->view('templates/footer');
     }
 }

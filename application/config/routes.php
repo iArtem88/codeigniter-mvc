@@ -54,6 +54,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /***********************************
  *
+ * RU:
+ *
  * http://example.com/[controller-class]/[controller-method]/[arguments]
  *
  * example.com/class/function/id/
@@ -110,6 +112,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['news'] = 'news';
 $route['news/create'] = 'news/create';
 $route['news/edit'] = 'news/edit';
+$route['news/delete'] = 'news/delete';
 $route['news/(:any)'] = 'news/view/$1';
 
 $route['(:any)'] = 'pages/view/$1';
