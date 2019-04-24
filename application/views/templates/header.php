@@ -8,8 +8,7 @@
 	<title><?php echo $title; ?></title>
 </head>
 <header>Logo</header>
-<a href="/home">Home</a>
-<a href="/about">About</a>
+    <?php $this->load->view('templates/menu' ); ?>
 <hr>
 <ul style="display: inline-block">
     <li><a href="/news">All Articles</a></li>
