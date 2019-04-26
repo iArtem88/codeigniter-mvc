@@ -11,5 +11,8 @@ class MY_Controller extends CI_Controller {
 
 		$this->load->model('news_model');
 		$this->data['news'] = $this->news_model->getNews();
+
+		$this->load->model('films_model');
+		$this->data['films'] = $this->films_model->getFilmsByRating(4);
 	}
 }

@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  *
  */
-class News extends CI_Controller
+class News extends MY_Controller
 {
 
     public function __construct()
@@ -26,66 +26,66 @@ class News extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'All News';
-        $data['news'] = $this->news_model->getNews();
+        $this->data['title'] = 'All News';
+        $this->data['all_news'] = $this->news_model->getNews();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('news/index', $data);
+        $this->load->view('templates/header', $this->data);
+        $this->load->view('news/index', $this->data);
         $this->load->view('templates/footer');
     }
 
     public function view($slug = null)
     {
-        $data['news_item'] = $this->news_model->getNews($slug);
+        $this->data['news_item'] = $this->news_model->getNews($slug);
 
-        if (empty($data['news_item'])) {
+        if (empty($this->data['news_item'])) {
             show_404();
         }
 
-        $data['title'] = $data['news_item']['title'];
-        $data['text'] = $data['news_item']['text'];
+        $this->data['title'] = $this->data['news_item']['title'];
+        $this->data['text'] = $this->data['news_item']['text'];
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('news/view', $data);
+        $this->load->view('templates/header', $this->data);
+        $this->load->view('news/view', $this->data);
         $this->load->view('templates/footer');
     }
 
     public function create()
     {
-        $data['title'] = 'Add article';
+        $this->data['title'] = 'Add article';
 
         $title = $this->input->post('title');
         $text = $this->input->post('text');
 
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/header', $this->data);
 
         if ($title && $text) {
 
             if ($this->news_model->addArticle($title, $text)) {
 
-                $this->load->view('news/success', $data);
+                $this->load->view('news/success', $this->data);
             }
         }
 
-        $this->load->view('news/create', $data);
+        $this->load->view('news/create', $this->data);
         $this->load->view('templates/footer');
     }
 
     public function edit($slug = null)
     {
-        $data['title'] = 'Edit article';
+        $this->data['title'] = 'Edit article';
 
-        $data['news_item'] = $this->news_model->getNews($slug);
+        $this->data['news_item'] = $this->news_model->getNews($slug);
 
-        if (empty($data['news_item'])) {
+        if (empty($this->data['news_item'])) {
             show_404();
         }
 
         if($slug) {
 
-            $data['title_news'] = $data['news_item']['title'];
-            $data['text_news'] = $data['news_item']['text'];
-            $data['slug_news'] = $data['news_item']['slug'];
+            $this->data['title_news'] = $this->data['news_item']['title'];
+            $this->data['text_news'] = $this->data['news_item']['text'];
+            $this->data['slug_news'] = $this->data['news_item']['slug'];
 
         }
 
@@ -103,28 +103,28 @@ class News extends CI_Controller
                 }
             }
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('news/edit', $data);
+        $this->load->view('templates/header', $this->data);
+        $this->load->view('news/edit', $this->data);
         $this->load->view('templates/footer');
     }
 
     public function delete($slug = null)
     {
-        $data['news'] = $this->news_model->getNews($slug); //$data['news_item'] - just for test attentiveness
+        $this->data['news_deleted'] = $this->news_model->getNews($slug); //$this->data['news_item'] - just for test attentiveness
 
-        if (empty($data['news'])) {
+        if (empty($this->data['news_deleted'])) {
             show_404();
         }
 
-        $data['title'] = 'Remove article';
-        $data['result'] = 'Remove error' . $data['news']['title'];
+        $this->data['title'] = 'Remove article';
+        $this->data['result'] = 'Remove error' . $this->data['news_deleted']['title'];
 
         if($this->news_model->deleteArticle($slug)) {
-            $data['result'] = $data['news']['title'] . ' removed succesfully';
+            $this->data['result'] = $this->data['news_deleted']['title'] . ' removed succesfully';
         }
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('news/delete', $data);
+        $this->load->view('templates/header', $this->data);
+        $this->load->view('news/delete', $this->data);
         $this->load->view('templates/footer');
     }
 }
