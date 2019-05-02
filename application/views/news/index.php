@@ -1,13 +1,7 @@
-<h1>All news</h1>
-<?php foreach ($all_news as $article) { ?>
-    <a href="news/<?php echo $article['slug']; ?>">
-        <h2><?php echo $article['title']; ?></h2>
-    </a>
-    <div>
-        <?php echo $article['text']; ?>
-    </div>
-    <a href="news/edit/<?php echo $article['slug']; ?>">Edit</a>
-    <a href="news/delete/<?php echo $article['slug']; ?>">Delete</a>
-<?php } ?>
-<hr>
-<a href="create">Add Article</a>
+<h1>Все новости</h1>
+
+<p><a href="create">добавить новость</a></p><br>
+
+<?php foreach ($news as $key => $value): ?>
+	<p><a href="view/<?php echo $value['slug']; ?>"><?php echo $value['title']; ?></a> | <a href="edit/<?php echo $value['slug']; ?>">edit</a> | <a href="delete/<?php echo $value['slug']; ?>">Х</a></p>
+<?php endforeach ?>
