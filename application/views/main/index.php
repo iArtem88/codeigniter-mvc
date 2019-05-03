@@ -6,7 +6,7 @@
 
             <?php foreach ($movie as $key => $value): ?>
               <div class="films_block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                <a href="show.html"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['name']; ?>"></a> 
+                <a href="/movies/view/<?php echo $value['slug']; ?>"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['name']; ?>"></a>
                 <div class="film_label"><a href="show.html"><?php echo $value['name']; ?></a></div>
               </div>
             <?php endforeach ?>
@@ -23,7 +23,7 @@
 
             <?php foreach ($serials as $key => $value): ?>
               <div class="films_block col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                <a href="#"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['name']; ?>"></a>
+                <a href="/movies/view/<?php echo $value['slug']; ?>"><img src="<?php echo $value['poster']; ?>" alt="<?php echo $value['name']; ?>"></a>
                 <div class="film_label"><a href="#"><?php echo $value['name']; ?></a></div>
               </div>
             <?php endforeach ?>
